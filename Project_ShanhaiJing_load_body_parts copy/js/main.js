@@ -41,8 +41,6 @@ let bodyPartGLTFpaths = [
 
 //let bodyPart01;
 //let bodyPart02;
-//let bodyPart03;
-//let bodyPart04;
 
 function setupThree() {
 
