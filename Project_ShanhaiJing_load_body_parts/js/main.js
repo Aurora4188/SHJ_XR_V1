@@ -93,8 +93,6 @@ function setupThree() {
   reflectorPlane2.rotation.set(0, 110, 0);
   reflectorPlane2.position.set(0, 0, 9);
 
-
-
   loadGLTF("assets/SHJ-mountain1.glb", function (model1) {
     model1.position.set(-10, 0, 0); // Set position for the first model.
     // Store the model reference for future use if needed
@@ -217,7 +215,7 @@ function updateThree() {
   t++;
 
   //rotate the creature group
-  creature.rotation.y = sin(frame * 0.001) * PI;
+  //creature.rotation.y = sin(frame * 0.001) * PI;
 
 
   for (let i = 0; i < joints.length; i++) {
@@ -510,10 +508,9 @@ class Spring {
 
     this.mesh = model;
 
-    // this.mesh = getBox();
-    // this.mesh.geometry.translate(0.5, 0, 0);
-
-    //scene.add(this.mesh); //the cube is not needed
+    //this.mesh = getBox();
+    //this.mesh.geometry.translate(0, 0, -0.5);
+    //scene.add(this.mesh);
   }
   update() {
     let force = p5.Vector.sub(this.b.pos, this.a.pos);
@@ -539,14 +536,14 @@ class Spring {
 
     let direction = new THREE.Vector3().subVectors(targetPosition, position);
     const quaternion = new THREE.Quaternion();
-    quaternion.setFromUnitVectors(new THREE.Vector3(0, -1, 0), direction.normalize());
+    quaternion.setFromUnitVectors(new THREE.Vector3(0, 0, 1), direction.normalize());
     this.mesh.rotation.setFromQuaternion(quaternion);
 
     //set the position for the mesh this line!!
     this.mesh.position.copy(position);
-    this.mesh.scale.x = direction.length() * 10; //?
+    this.mesh.scale.x = 10;
     this.mesh.scale.y = 10;
-    this.mesh.scale.z = 10;
+    this.mesh.scale.z = 20 * direction.length();
   }
 }
 
@@ -613,6 +610,7 @@ let springs = [];
 let connections = [];
 
 function loadCreatureBodyParts() {
+  let count = 0;
   for (let i = 0; i < bodyPartGLTFpaths.length; i++) {
     let filepath = bodyPartGLTFpaths[i];
     loadBodyGLTF(filepath, function (model) {
@@ -622,11 +620,14 @@ function loadCreatureBodyParts() {
       model.scale.set(BODYPART_SCALE, BODYPART_SCALE, BODYPART_SCALE);
       //model.rotation.set(0, 180, 0);
 
-      bodyParts.push(model);
+      //bodyParts.push(model);
+      bodyParts[i] = model;
 
       // spring
-      console.log("bodyPart", i, "loaded");
-      if (bodyParts.length === bodyPartGLTFpaths.length) {
+      count++;
+      console.log("bodyPart", i, "loaded", count);
+
+      if (count === bodyPartGLTFpaths.length) {
         console.log("All body parts loaded");
         setupSpringMeshes();
       }
@@ -658,56 +659,6 @@ function setupSpringMeshes() {
   }
 }
 
-/*
-function setupSpringMeshes() {
-  let springLengths = [
-    BODYPART_SCALE,
-    BODYPART_SCALE * 0.7 * 1,
-    BODYPART_SCALE * 0.89,
-    BODYPART_SCALE * 1.21 * 1,
-    BODYPART_SCALE * 2.8];
-
-  for (let i = 0; i < bodyParts.length + 1; i++) {
-    connections.push(new Connection(0, 80 + 20 * i, 0, 5));
-  }
-
-  for (let i = 0; i < connections.length - 1; i++) {
-    let a = connections[i];
-    let b = connections[i + 1];
-    let len = springLengths[i];
-    let s = new Spring(a, b, len, bodyParts[i]);
-    springs.push(s);
-  }
-}
-*/
-
-
-// function updateSpringMeshes() {
-//   if (connections.length == 0 || springs.length == 0) return;
-
-//   let radDist = map(sin(frame * 0.001), -1, 1, 40, 70);
-//   //let x = cos(frame * 0.001) * radDist * 2;
-//   //let y = sin(frame * 0.001) * radDist * 2;
-//   //let z = sin(frame * 0.001) * radDist * 2;
-//   let x = map(cos(frame * 0.001) * radDist, -1, 1, 0, 8);
-//   let z = map(sin(frame * 0.001) * radDist, -1, 1, -4, 4);
-//   connections[0].pos.x = x;
-//   //connections[0].pos.y = y + 20;
-//   connections[0].pos.z = z;
-
-//   // update springs first, then update connections
-//   for (let i = 0; i < springs.length; i++) {
-//     springs[i].update();
-//   }
-
-//   for (let i = 0; i < connections.length; i++) {
-//     connections[i].move();
-//     connections[i].update();
-//   }
-
-//   //updateSwimMotion();
-// }
-
 function updateSpringMeshes() {
   if (connections.length == 0 || springs.length == 0) return;
 
@@ -738,7 +689,7 @@ function updateSwimMotion() {
   // a wave-like motion to each part
   for (let i = 0; i < connections.length; i++) {
     let phase = swimOffset + i * 0.3; // Adjust the 0.5 for phase difference between parts
-    connections[i].pos.z += Math.sin(phase) * 0.2; // Vertical movement
+    connections[i].pos.z += 0; //Math.sin(phase) * 0.2; // Vertical movement
     connections[i].pos.x += Math.cos(phase * 0.5) * 0.4; // Horizontal movement
     connections[i].update();
     //connections[i].model.rotation.z = Math.sin(phase) * 0.2; // Adjust rotation

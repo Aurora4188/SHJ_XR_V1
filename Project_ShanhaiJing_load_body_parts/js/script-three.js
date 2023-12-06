@@ -40,12 +40,10 @@ function initThree() {
 
   setupThree(); // *** 
 
-  //animate();
   renderer.setAnimationLoop(animate); // Necessary for WebXR!!!
 }
 
 function animate() {
-  //requestAnimationFrame(animate);
   stats.update();
   time = performance.now();
 
