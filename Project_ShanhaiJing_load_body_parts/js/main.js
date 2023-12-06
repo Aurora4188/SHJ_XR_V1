@@ -504,7 +504,7 @@ class Spring {
     this.a = a;
     this.b = b;
     this.len = len;
-    this.k = 0.01; // ***
+    this.k = 0.012; // ***
 
     this.mesh = model;
 
@@ -541,9 +541,9 @@ class Spring {
 
     //set the position for the mesh this line!!
     this.mesh.position.copy(position);
-    this.mesh.scale.x = 10;
-    this.mesh.scale.y = 10;
-    this.mesh.scale.z = 20 * direction.length();
+    this.mesh.scale.x = 14;
+    this.mesh.scale.y = 14;
+    this.mesh.scale.z = 18 * direction.length();//change the length of the spring
   }
 }
 
@@ -640,9 +640,9 @@ function setupSpringMeshes() {
   console.log("Ready!!");
   let springLengths = [
     BODYPART_SCALE * 1,
-    BODYPART_SCALE * 0.7 * 3,
-    BODYPART_SCALE * 0.89,
-    BODYPART_SCALE * 1.21 * 2,
+    BODYPART_SCALE * 0.7 * 1,
+    BODYPART_SCALE * 0.89 * 2,
+    BODYPART_SCALE * 1.21 * 1,
     BODYPART_SCALE * 2.8];
   // create connections
   for (let i = 0; i < bodyParts.length + 1; i++) {
