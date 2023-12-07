@@ -4,7 +4,7 @@
 const BODYPART_SCALE = 3.0;
 const WORLD_HALF = 200;
 const VIDEO_WIDTH = 640;
-const SeaLevel = 10;
+const SeaLevel = 6;
 let joints = [];
 
 let params = {
@@ -14,6 +14,8 @@ let params = {
 let model01, model04, model07;
 let model02, model05;
 let model03, model06;
+
+let model1;
 
 let mirrorM;
 let fishM;
@@ -157,6 +159,8 @@ function setupThree() {
     model03.scale.z = 2.0 * 1.2;
     model03.rotation.y = -Math.PI / 3;
   });
+
+
 
   // load the avatar
   const fishLoader = new GLTFLoader();
