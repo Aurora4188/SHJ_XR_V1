@@ -4,6 +4,7 @@
 const BODYPART_SCALE = 3.0;
 const WORLD_HALF = 200;
 const VIDEO_WIDTH = 640;
+const SeaLevel = 20;
 let joints = [];
 
 let params = {
@@ -81,20 +82,21 @@ function setupThree() {
 
   seaPlane = getPlane();
   scene.add(seaPlane);
+  seaPlane.position.set(0, -SeaLevel, 0);//set the position for the sea plane
 
   // add the mirror
   // let mirrorMaterial = getPlaneMirror().material;
   let reflectorPlane1 = getPlaneMirror();
   scene.add(reflectorPlane1);
-  reflectorPlane1.position.set(0, 0, 10);
+  reflectorPlane1.position.set(0, 0 - SeaLevel, 10);
 
   let reflectorPlane2 = getPlaneMirror();
   scene.add(reflectorPlane2);
   reflectorPlane2.rotation.set(0, 110, 0);
-  reflectorPlane2.position.set(0, 0, 9);
+  reflectorPlane2.position.set(0, 0 - SeaLevel, 9);
 
   loadGLTF("assets/SHJ-mountain1.glb", function (model1) {
-    model1.position.set(-10, 0, 0); // Set position for the first model.
+    model1.position.set(-10, 0 - SeaLevel, 0); // Set position for the first model.
     // Store the model reference for future use if needed
     model01 = model1;
     model01.scale.x = 2.5;
@@ -103,7 +105,7 @@ function setupThree() {
   });
 
   loadGLTF("assets/SHJ-mountain1.glb", function (model4) {
-    model4.position.set(20, 0, -20); // Set position for the first model.
+    model4.position.set(20, 0 - SeaLevel, -20); // Set position for the first model.
     // Store the model reference for future use if needed
     model04 = model4;
     model04.scale.x = 4;
@@ -113,7 +115,7 @@ function setupThree() {
   });
 
   loadGLTF("assets/SHJ-mountain1.glb", function (model7) {
-    model7.position.set(-12, -3, -20); // Set position for the first model.
+    model7.position.set(-12, -3 - SeaLevel, -20); // Set position for the first model.
     // Store the model reference for future use if needed
     model07 = model7;
     model07.scale.x = 6;
@@ -123,7 +125,7 @@ function setupThree() {
   });
   //
   loadGLTF("assets/SHJ-mountain2.glb", function (model2) {
-    model2.position.set(6, 0, -6); // Set position for the second model
+    model2.position.set(6, 0 - SeaLevel, -6); // Set position for the second model
     model02 = model2;
     model02.scale.x = 2.5 * 0.6;
     model02.scale.y = 3.3 * 0.8;
@@ -131,7 +133,7 @@ function setupThree() {
     model02.rotation.y = - Math.PI / 6;
   });
   loadGLTF("assets/SHJ-mountain2.glb", function (model5) {
-    model5.position.set(38, -1, 10); // Set position for the second model
+    model5.position.set(38, -1 - SeaLevel, 10); // Set position for the second model
     model05 = model5;
     model05.scale.x = 2.5;
     model05.scale.y = 3.3;
@@ -140,7 +142,7 @@ function setupThree() {
   });
 
   loadGLTF("assets/SHJ-mountain3.glb", function (model3) {
-    model3.position.set(0, -1, 25); // Set position for the second model
+    model3.position.set(0, -1 - SeaLevel, 25); // Set position for the second model
     model03 = model3;
     model03.scale.x = 2.5 * 1.2;
     model03.scale.y = 3.3 * 1.4;
@@ -641,8 +643,8 @@ function setupSpringMeshes() {
   let springLengths = [
     BODYPART_SCALE * 1,
     BODYPART_SCALE * 0.7 * 1,
-    BODYPART_SCALE * 0.89 * 2,
-    BODYPART_SCALE * 1.21 * 4,
+    BODYPART_SCALE * 0.9 * 2.5,
+    BODYPART_SCALE * 1.21 * 5,
     BODYPART_SCALE * 2.8 * 2];
   // create connections
   for (let i = 0; i < bodyParts.length + 1; i++) {
