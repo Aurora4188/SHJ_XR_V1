@@ -221,7 +221,13 @@ function setupThree() {
   const moon = getMoon();
   moon.position.set(0, 0, 0); // Same position as light1
   //light1.add(moon);
+
+  target = getBox();
+  scene.add(target);
 }
+
+let target;
+
 
 function updateThree() {
 
