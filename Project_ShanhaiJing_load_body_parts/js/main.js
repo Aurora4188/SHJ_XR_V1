@@ -642,8 +642,8 @@ function setupSpringMeshes() {
     BODYPART_SCALE * 1,
     BODYPART_SCALE * 0.7 * 1,
     BODYPART_SCALE * 0.89 * 2,
-    BODYPART_SCALE * 1.21 * 1,
-    BODYPART_SCALE * 2.8];
+    BODYPART_SCALE * 1.21 * 4,
+    BODYPART_SCALE * 2.8 * 2];
   // create connections
   for (let i = 0; i < bodyParts.length + 1; i++) {
     //connections.push(new Connection(0, 80 + 20 * i, 0, 5));
