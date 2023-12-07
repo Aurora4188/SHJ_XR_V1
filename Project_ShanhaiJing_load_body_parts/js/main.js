@@ -198,7 +198,7 @@ function setupThree() {
   });
   let BlockSphere = getBigSphere();
   BlockSphere.position.set(0, -10, 0);
-  BlockSphere.scale.set(6000, 6000, 6000);
+  BlockSphere.scale.set(600, 600, 600);
   scene.add(BlockSphere);
 
 
