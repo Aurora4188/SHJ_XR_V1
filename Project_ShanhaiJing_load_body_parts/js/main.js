@@ -4,7 +4,7 @@
 const BODYPART_SCALE = 3.0;
 const WORLD_HALF = 200;
 const VIDEO_WIDTH = 640;
-const SeaLevel = 20;
+const SeaLevel = 10;
 let joints = [];
 
 let params = {
@@ -32,11 +32,19 @@ let creature = new THREE.Group();
 let t = 0;
 
 let bodyParts = [];
+// let bodyPartGLTFpaths = [
+//   'assets/bodyPart01-head.gltf',
+//   'assets/bodyPart01-5.gltf',
+//   'assets/bodyPart02.gltf',
+//   'assets/bodyPart03.gltf',
+//   'assets/bodyPart04_Tail.gltf'
+// ];
 let bodyPartGLTFpaths = [
   'assets/bodyPart01-head.gltf',
   'assets/bodyPart01-5.gltf',
   'assets/bodyPart02.gltf',
-  'assets/bodyPart03.gltf',
+  'assets/bodyPart03V2.gltf',
+  'assets/bodyPart03-5.gltf',
   'assets/bodyPart04_Tail.gltf'
 ];
 
@@ -640,12 +648,19 @@ function loadCreatureBodyParts() {
 
 function setupSpringMeshes() {
   console.log("Ready!!");
+  // let springLengths = [
+  //   BODYPART_SCALE * 1,
+  //   BODYPART_SCALE * 0.7 * 1,
+  //   BODYPART_SCALE * 0.9 * 2.5,
+  //   BODYPART_SCALE * 1.21 * 5,
+  //   BODYPART_SCALE * 2.8 * 2];
   let springLengths = [
     BODYPART_SCALE * 1,
     BODYPART_SCALE * 0.7 * 1,
-    BODYPART_SCALE * 0.9 * 2.5,
-    BODYPART_SCALE * 1.21 * 5,
-    BODYPART_SCALE * 2.8 * 2];
+    BODYPART_SCALE * 0.9 * 2,
+    BODYPART_SCALE * 1.21 * 2,
+    BODYPART_SCALE * 1.21 * 3,
+    BODYPART_SCALE * 2.8 * 1];
   // create connections
   for (let i = 0; i < bodyParts.length + 1; i++) {
     //connections.push(new Connection(0, 80 + 20 * i, 0, 5));
@@ -665,7 +680,7 @@ function updateSpringMeshes() {
   if (connections.length == 0 || springs.length == 0) return;
 
   // Parameters for the circular path
-  let circleRadius = 80; // Radius of the circle
+  let circleRadius = 90; // Radius of the circle
   let circleSpeed = 0.01 * 0.5; // Speed of the movement along the circle
 
   // Calculate the new position for the first connection
