@@ -7,11 +7,9 @@ function setupWebXR() {
   function onSelectStart() {
     this.userData.isSelecting = true;
     // get controller's position and direction
-
     const controllerPos = controller.position;
     const controllerDir = controller.getWorldDirection(new THREE.Vector3());
-
-    const targetPos = new THREE.Vector3().addVectors(controllerPos, controllerDir.multiplyScalar(100));
+    const targetPos = new THREE.Vector3().addVectors(controllerPos, controllerDir.multiplyScalar(2));
     target.position.copy(targetPos);
   }
   function onSelectEnd() {
