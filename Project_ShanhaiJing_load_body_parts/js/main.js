@@ -104,7 +104,7 @@ function setupThree() {
   reflectorPlane2.position.set(0, 0 - SeaLevel, 9);
 
   loadGLTF("assets/SHJ-mountain1.glb", function (model1) {
-    model1.position.set(-10, 0 - SeaLevel, 0); // Set position for the first model.
+    model1.position.set(-10, 1 - SeaLevel, 0); // Set position for the first model.
     // Store the model reference for future use if needed
     model01 = model1;
     model01.scale.x = 2.5;
@@ -113,7 +113,7 @@ function setupThree() {
   });
 
   loadGLTF("assets/SHJ-mountain1.glb", function (model4) {
-    model4.position.set(20, 0 - SeaLevel, -20); // Set position for the first model.
+    model4.position.set(20, 2 - SeaLevel, -20); // Set position for the first model.
     // Store the model reference for future use if needed
     model04 = model4;
     model04.scale.x = 4;
@@ -123,7 +123,7 @@ function setupThree() {
   });
 
   loadGLTF("assets/SHJ-mountain1.glb", function (model7) {
-    model7.position.set(-12, -3 - SeaLevel, -20); // Set position for the first model.
+    model7.position.set(-12, -2 - SeaLevel, -20); // Set position for the first model.
     // Store the model reference for future use if needed
     model07 = model7;
     model07.scale.x = 6;
@@ -196,7 +196,10 @@ function setupThree() {
 
     // }
   });
-
+  let BlockSphere = getBigSphere();
+  BlockSphere.position.set(0, -10, 0);
+  BlockSphere.scale.set(6000, 6000, 6000);
+  scene.add(BlockSphere);
 
 
   light = getLightGroup();
@@ -308,6 +311,15 @@ function getSphere() {
   });
   let mesh = new THREE.Mesh(geometry, material);
   // no adding to the scene
+  return mesh;
+}
+
+function getBigSphere() {
+  let geometry = new THREE.SphereGeometry(1, 24, 24);
+  let material = new THREE.MeshBasicMaterial({
+    color: "#050505"
+  });
+  let mesh = new THREE.Mesh(geometry, material);
   return mesh;
 }
 
